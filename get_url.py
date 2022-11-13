@@ -10,7 +10,6 @@ def add_download_rpc(url_list,path):
     for url in url_list: 
         s.aria2.addUri(config.RPC_TOKEN,[url],dict(dir=os.path.join(r"/downloads",path)))
 
-
 def get_1024_url(url):
     headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"}
     response = requests.get(url,headers=headers)

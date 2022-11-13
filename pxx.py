@@ -77,15 +77,18 @@ async def show_at_random(update: Update, context: ContextTypes.DEFAULT_TYPE):
     pic_list = []
     for pic in result:
         pic_list.append(InputMediaPhoto(open(pic, 'rb'), caption = 'enjoy'))
-        from_item.
     await context.bot.send_media_group(chat_id=update.effective_chat.id, media=pic_list)
         # await context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(pic, 'rb'))
+
+async def list_img_db(update: Update, context: ContextTypes.DEFAULT_TYPE)
+    pass
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token(config.BOT_TOKEN).build()
     start_handler = CommandHandler('start', start)
     echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
     send_1024_pic = CommandHandler('show',show_at_random)
+    list_img = CommandHandler('list',list_img_db)
     application.add_handler(start_handler)
     application.add_handler(echo_handler)
     application.add_handler(send_1024_pic)
