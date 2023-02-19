@@ -183,7 +183,7 @@ cython_debug/
 
 config.py
 
-1024_crawler/config
+#1024_crawler/config
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
