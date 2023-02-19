@@ -58,6 +58,7 @@ def reset_media_db():
             MEDIA_ID primary key,
             MEDIA_FULL_PATH TEXT,
             MEDIA_ITEM TEXT,
+            MEDIA_NAME TEXT,
             MEDIA_SIZE INT);
             '''
     c.execute(create_tb_cmd)
@@ -71,17 +72,20 @@ def reset_media_db():
         for file in files:
             full_name = os.path.join(root, file)
             item = os.path.basename(os.path.dirname(full_name))
+            name = os.path.basename(full_name)
             size = os.path.getsize(full_name)
             if int(size) < 10000000:
                 n += 1
             # print(n)
-                c.execute("insert into media values (?, ?, ?, ?)", (n, full_name, item, size))
+                c.execute("insert into media values (?, ?, ?, ?, ?)", (n, full_name, item, name, size))
     conn.commit()
     create_tb_cmd = '''
             CREATE TABLE IF NOT EXISTS nub
             (
             MEDIA_NUB int);
             '''
+    # c.execute(create_tb_cmd)
+    c.execute("DROP TABLE IF EXISTS nub")
     c.execute(create_tb_cmd)
     c.execute("insert into nub values (?)", (n,))
     conn.commit()
@@ -93,9 +97,11 @@ def reset_media_db():
 def rows_nub():
     conn = sqlite3.connect(config.DB_PATH)
     c = conn.cursor()
-    # c.execute("SELECT count(*) FROM nub")
-    # hangshu = c.fetchall()
-    c.execute("SELECT * FROM media")
+    c.execute("SELECT * FROM nub")
+    hangshu = c.fetchall()
+    # print(type(hangshu[0][0]))
+    # print(hangshu[0][0])
+    c.execute("SELECT MEDIA_FULL_PATH FROM media")
     # hangshu = c.fetchall()
     # rdm_nub = random.randint(1, int(hangshu[0][0]))
     # c.execute("SELECT * FROM media where MEDIA_SIZE<?", (10000000,))
