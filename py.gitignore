@@ -182,7 +182,8 @@ dmypy.json
 cython_debug/
 
 config.py
-
+1024_crawler/
+nohup.out
 #1024_crawler/config
 
 # PyCharm

@@ -1,26 +1,11 @@
 import logging
 from telegram import Update
 from telegram.ext import filters, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes
-# import requests
-# from bs4 import BeautifulSoup
-# import re
-# import json
 import os
 from telegram import InputMediaPhoto
 import get_url
 import config
 import traverse_img
-# s = xmlrpc.client.ServerProxy('http://127.0.0.1:6800/rpc')
-
-# # s.aria2.addUri('token:Aria21281066939',['http://example.org/file'],dict(dir="/tmp"))
-# def add_download_rpc(url_list,path):
-#     # jsonreq = json.dumps({'jsonrpc':'2.0', 'id':'qwer', 'method':'aria2.addUri',
-#     #                      'params':['token:Aria21281066939', [link],{}]})
-#     # requests.post('http://127.0.0.1:6800/jsonrpc', jsonreq)
-#     s = xmlrpc.client.ServerProxy('http://127.0.0.1:6801/rpc')
-#     for url in url_list: 
-        
-#         s.aria2.addUri('token:Aria21281066939',[url],dict(dir=os.path.join(r"/downloads",path)))
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -41,18 +26,11 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
             url = url.replace('mob','data')
         await context.bot.send_message(chat_id=update.effective_chat.id, text=str(get_url.get_1024_url(str(url))))
     except ValueError:
-        await context.bot.send_message(chat_id=update.effective_chat.id, text='Not 1024 link')
+        await context.bot.send_message(chat_id=update.effective_chat.id, text='Bad link')
+    except AttributeError:
+        await context.bot.send_message(chat_id=update.effective_chat.id, text='Bad or Blank link')
 
 async def show_at_random(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # dirpath = r'/root/docker_aria2-pro/downloads_local' 
-    # img_list = from_item = []
-    # for root, dirs, files in os.walk(dirpath):
-    #     for file in files:
-    #         full_name = os.path.join(root, file)
-    #         img_list.append(full_name)
-    #         from_item.append(os.path.basename(full_name))
-    
-    # result = sample(img_list,9)
     pic_list = []
     result = traverse_img.rows_nub()
     for pic in result:
