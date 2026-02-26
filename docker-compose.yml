@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  aria2:
+    image: p3terx/aria2-pro
+    container_name: aria2-pro_local
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - PUID=65534
+      - PGID=65534
+      - UMASK_SET=022
+      - RPC_SECRET=${ARIA2_SECRET}
+      - RPC_PORT=6801        # 对应你原脚本中的 6801 端口
+      - LISTEN_PORT=6889     # 对应你原脚本的 BT 监听端口
+      - DISK_CACHE=64M
+      - IPV6_MODE=true       # 开启 IPv6 支持
+      - UPDATE_TRACKERS=true # 自动更新 BT Tracker 提升速度
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./config_local:/config
+      - ${PIC_DIR}:/downloads
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+
+  tg_bot:
+    # build: .
+    image: tg_bot:v1.0
+    container_name: tg_pxx_bot
+    restart: unless-stopped
+    network_mode: host
+    depends_on:
+      - aria2
+    env_file:
+      - .env
+    volumes:
+      - ${PIC_DIR}:/downloads
+      - ./bot_data:/app/data
