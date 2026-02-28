@@ -2,3 +2,30 @@
 *.tar
 *.sh
 config_local/
+.venv/
+venv/
+# --- Python 相关 ---
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# --- uv & 虚拟环境 ---
+# 忽略 uv 创建的虚拟环境目录
+.venv/
+.uv/
+
+# --- VS Code 相关 ---
+.vscode/
+# 如果你希望团队共享调试配置，可以注释掉上面一行，改用下面几行：
+# .vscode/settings.json
+# .vscode/tasks.json
+# .vscode/launch.json
+
+# --- 环境变量与敏感信息 ---
+.env
+.env.local
+
+# --- 操作系统临时文件 ---
+.DS_Store
+Thumbs.db
