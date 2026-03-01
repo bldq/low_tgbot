@@ -11,7 +11,7 @@ ROOT_DIR = os.getenv('ROOT_DIR', '/downloads')
 RPC_SERVER = os.getenv('RPC_SERVER', 'http://aria2:6801/jsonrpc')
 
 # Aria2 的 RPC Token
-RPC_TOKEN = os.getenv('RPC_TOKEN', 'token:Aria21281066939')
+RPC_TOKEN = os.getenv('RPC_TOKEN', 'token:')
 
 # 容器内的数据库存放路径
 DB_PATH = os.getenv('DB_PATH', '/app/data/media.db')
